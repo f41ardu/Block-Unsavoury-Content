@@ -14,3 +14,5 @@ awk '{print "local-data: \""$1" A 0.0.0.0\""}' my4.txt > block3.txt
 Für hostfiles 
 egrep -v '^\s*$|^#|localhost' psh.txt | awk {'print $2'}
 
+leerzeichen entfernen 
+sed -e 's/^[ ]*//'
