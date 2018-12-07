@@ -27,10 +27,4 @@ fi
 
  wget -q -N -P lists/$list_item/ $loop
 
-# egrep -v '^\s*$|^#|localhost' psh.txt | awk {'print $2'} 
-
-#
-# --- hostfiles
-#
-# egrep -v '^\s*$|^#' hosts.txt | sed -e 's/127.0.0.1//' | sed -e 's/^[ ]*//'
 done
