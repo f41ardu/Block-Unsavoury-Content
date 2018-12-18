@@ -1,4 +1,4 @@
-#/bin/sh
+#/bin/bash
 
 if [ ! -d "tmp" ]; then
     mkdir tmp
@@ -24,8 +24,8 @@ fi
 if [ ! -d "lists/$list_item/bak" ]; then
      mkdir lists/$list_item/bak
 fi
- echo "Download: " $list_item"/"$loop
- wget -q -N -P lists/$list_item/ $loop
+ echo "Download: " $list_item"--/--"$loop
+ wget -T 4 -q -N -P lists/$list_item/ $loop
 
 done
 
