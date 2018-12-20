@@ -1,7 +1,21 @@
 #/bin/bash
 
-
-usage() { echo "Usage: $0 [-f <file> ] " 1>&2; exit 1; }
+usage() 
+{ echo "Usage: $0 [-f <file>]" 
+  echo "" 
+  echo " Content of input file"
+  echo " A list of aggregated ad-block list which can be found at:"
+  echo " https://v.firebog.net/hosts/lists.php" 
+  echo ""
+  echo " Create a file with the list for download the host files:" 
+  echo ""
+  echo "https://hostsfile.org/Downloads/hosts.txt"
+  echo "https://someonewhocares.org/hosts/zero/hosts"
+  echo ""
+  echo "Output is block.conf which can be used with unbound"
+  1>&2; 
+  exit 1; 
+}
 
 while getopts ":f:" o; do
     case "${o}" in
