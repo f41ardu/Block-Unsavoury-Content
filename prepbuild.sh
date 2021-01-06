@@ -1,7 +1,7 @@
 #/bin/bash
 
 usage() 
-{ echo "Usage: $0 [-f <file>]" 
+{ echo "Usage: $0 [-f <file> -o <output> ]" 
   echo "" 
   echo " Content of input file"
   echo " A list of aggregated ad-block list which can be found at:"
@@ -12,15 +12,19 @@ usage()
   echo "https://hostsfile.org/Downloads/hosts.txt"
   echo "https://someonewhocares.org/hosts/zero/hosts"
   echo ""
-  echo "Output is block.conf which can be used with unbound"
+  echo "The file created on output can be used in unbound"
+  echo ""
+  echo "Example: prepbuild.sh -f list.inp -o block.conf"
   1>&2; 
   exit 1; 
 }
 
-while getopts ":f:" o; do
+while getopts ":f:o:" o; do
     case "${o}" in
         f)
             s=${OPTARG}
+            ;;
+	o)  OUTPUT=${OPTARG}
             ;;
         *)
             usage
@@ -88,5 +92,5 @@ liste=$(cat tmp/dirs.txt | sort -u)
         egrep -v localhost tmp/host.1 > tmp/host.2
         cat tmp/host.2 | sed 's/  / /g' | sed 's/#[^#]*$//' | sed -e 's/\t//' | sort -u > tmp/host.3
 awk '{print "local-data: \""$1" A 0.0.0.0\""}' tmp/host.3 > tmp/block.conf.1
-grep -v 'local-data: " A 0.0.0.0"' tmp/block.conf.1 | sed -e 's/;/ /' > block.conf
+grep -v 'local-data: " A 0.0.0.0"' tmp/block.conf.1 | sed -e 's/;/ /' > $OUTPUT
 
